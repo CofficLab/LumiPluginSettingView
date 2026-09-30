@@ -94,7 +94,7 @@ private struct PluginSettingsShell<Provider: SettingViewProviding & ObservableOb
                     selected.makeDetailView()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
-                    AppEmptyState(icon: "gearshape", title: "选择一个设置项")
+                    AppEmptyState(icon: "gearshape", title: LumiPluginLocalization.string("Select a tab", bundle: .module))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
@@ -218,7 +218,7 @@ private struct MobilePluginSettingsShell<Provider: SettingViewProviding & Observ
                     appIdentityHeader
                 }
 
-                Section("设置") {
+                Section(LumiPluginLocalization.string("Settings", bundle: .module)) {
                     ForEach(provider.entries) { entry in
                         NavigationLink(value: entry.id) {
                             Label(entry.title, systemImage: entry.systemImage)
@@ -228,7 +228,7 @@ private struct MobilePluginSettingsShell<Provider: SettingViewProviding & Observ
                 }
             }
             .listStyle(.insetGrouped)
-            .navigationTitle("设置")
+            .navigationTitle(LumiPluginLocalization.string("Settings", bundle: .module))
             .navigationDestination(for: String.self) { entryID in
                 detailView(for: entryID)
             }
@@ -246,7 +246,7 @@ private struct MobilePluginSettingsShell<Provider: SettingViewProviding & Observ
                     appIdentityHeader
                 }
 
-                Section("设置") {
+                Section(LumiPluginLocalization.string("Settings", bundle: .module)) {
                     ForEach(provider.entries) { entry in
                         NavigationLink(value: entry.id) {
                             Label(entry.title, systemImage: entry.systemImage)
@@ -255,12 +255,12 @@ private struct MobilePluginSettingsShell<Provider: SettingViewProviding & Observ
                 }
             }
             .listStyle(.sidebar)
-            .navigationTitle("设置")
+            .navigationTitle(LumiPluginLocalization.string("Settings", bundle: .module))
         } detail: {
             if let selectedEntryID = provider.selectedEntryID {
                 detailView(for: selectedEntryID)
             } else {
-                AppEmptyState(icon: "gearshape", title: "选择一个设置项")
+                AppEmptyState(icon: "gearshape", title: LumiPluginLocalization.string("Select a tab", bundle: .module))
             }
         }
         .navigationSplitViewStyle(.balanced)
@@ -298,7 +298,7 @@ private struct MobilePluginSettingsShell<Provider: SettingViewProviding & Observ
     @ToolbarContentBuilder
     private var doneButton: some ToolbarContent {
         ToolbarItem(placement: .confirmationAction) {
-            Button("完成") {
+            Button(LumiPluginLocalization.string("Done", bundle: .module)) {
                 dismiss()
             }
             .accessibilityIdentifier("kuzee.settings.done")
@@ -313,7 +313,7 @@ private struct MobilePluginSettingsShell<Provider: SettingViewProviding & Observ
                 .navigationBarTitleDisplayMode(.inline)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         } else {
-            AppEmptyState(icon: "gearshape", title: "设置项不可用")
+            AppEmptyState(icon: "gearshape", title: LumiPluginLocalization.string("Setting unavailable", bundle: .module))
         }
     }
 
