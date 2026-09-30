@@ -4,19 +4,28 @@ import ProviderSettingView
 /// Replaces the default settings provider with Lumi's plugin-owned settings view.
 @MainActor
 public final class PluginSettingView: SuperPlugin {
-    public let id = "com.coffic.kuzee.plugin.setting-view"
+    /// 默认插件标识。宿主可在装配时传入自己的 id。
+    public static let defaultPluginID = "com.coffic.kuzee.plugin.setting-view"
+
+    public let id: String
     public let order = 3
-    public let metadata = PluginMetadata(
-        id: "com.coffic.kuzee.plugin.setting-view",
-        name: "设置窗口",
-        description: "提供设置窗口的外壳与侧边栏入口渲染。",
-        category: .core,
-        policy: .required
-    )
+    public let metadata: PluginMetadata
 
     private var manager: SettingViewManager?
 
-    public init() {}
+    /// 创建设置窗口插件。
+    ///
+    /// - Parameter id: 插件唯一标识，决定 `PluginMetadata.id`。
+    public init(id: String = PluginSettingView.defaultPluginID) {
+        self.id = id
+        self.metadata = PluginMetadata(
+            id: id,
+            name: "设置窗口",
+            description: "提供设置窗口的外壳与侧边栏入口渲染。",
+            category: .core,
+            policy: .required
+        )
+    }
 
     public func onBoot(kernel: KernelCoreContainer) throws {
         let manager = SettingViewManager()

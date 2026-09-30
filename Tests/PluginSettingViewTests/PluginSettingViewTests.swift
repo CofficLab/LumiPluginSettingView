@@ -55,4 +55,13 @@ struct PluginSettingViewTests {
         #expect(plugin.metadata.category == .core)
         #expect(!plugin.metadata.policy.isConfigurable)
     }
+
+    @Test("宿主可注入自定义插件 id")
+    func customIDIsApplied() {
+        let plugin = PluginSettingView(id: "com.example.custom.plugin.setting-view")
+
+        #expect(plugin.id == "com.example.custom.plugin.setting-view")
+        #expect(plugin.metadata.id == plugin.id)
+        #expect(PluginSettingView.defaultPluginID == "com.coffic.kuzee.plugin.setting-view")
+    }
 }
